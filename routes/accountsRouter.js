@@ -3,7 +3,7 @@ const db = require('../data/dbConfig');
 const router = express.Router();
 
 
-router.get('/', async (req, res, next) =>{
+router.get("/", async (req, res, next) => {
     try{
         const accounts = await db.select("*").from("accounts")
         res.json(accounts)
@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) =>{
         db.select("*").from()
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
     try{
         const id = await db.select("*").from("accounts").where("id", req.params.id)
         res.json(id)
@@ -40,7 +40,7 @@ router.post("/", async (req, res, next) => {
 })
     
 
-router.put('/:id', async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
     const payload = {
         name : req.body.name,
         budget: req.body.budget,
@@ -55,9 +55,10 @@ router.put('/:id', async (req, res, next) => {
      }
 })
 
-router.delete('/id', async (req, res, next) =>{
+router.delete("/:id", async (req, res, next) =>{
      try{
         await db("accounts").where("id", req.params.id).del()
+        res.status(204).end()
      }
      catch(err){
          next(err)
